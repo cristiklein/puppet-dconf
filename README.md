@@ -21,10 +21,10 @@ Example with a string (add quotes) ::
             value => "'two-finger-scrolling'",
     }
 
-Example with a list (crazy escaping...) ::
+Example with a list (escape backslashes) ::
 
     dconf::set { "/org/gnome/libgnomekbd/keyboard/options":
-            value => "\\\"['ctrl\\tctrl:nocaps']\\\"",
+	    value => "['ctrl\\tctrl:nocaps']",
     }
 
 

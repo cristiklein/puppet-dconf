@@ -10,9 +10,9 @@ define dconf::set ($value) {
 	debug "Dconf: set $name to $value"
 
 	exec { "dconf set $name":
-		command => "/bin/sh -c 'eval `dbus-launch --auto-syntax`'\" && dconf write $title $value\"",
+		command => "/bin/sh -c 'eval `dbus-launch --auto-syntax`'\" && dconf write $name \\\"$value\\\"\"",
 		path => "/usr/bin",
-		onlyif => "/bin/sh -c 'eval `dbus-launch --auto-syntax`'\" && test \"$value\" != \"`dconf read $name`\"",
+		onlyif => "/bin/sh -c 'eval `dbus-launch --auto-syntax`'\" && test \\\"$value\\\" != \\\"`dconf read $name`\\\"\"",
 		logoutput => "true",
 		require => Package['dconf-tools'],
 	}
