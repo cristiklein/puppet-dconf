@@ -9,7 +9,7 @@ Usage
 
 Because of current limitations, a certain level of quoting/escaping needs to be done on the 'value' parameter. The easiest is to give some examples.
 
-Example with a bool (no escaping) ::
+Example with a bool (no quoting/escaping needed) ::
 
     dconf::set { "/com/canonical/indicator/datetime/show-date":
             value => "true",
@@ -21,7 +21,7 @@ Example with a string (add quotes) ::
             value => "'two-finger-scrolling'",
     }
 
-Example with a list ::
+Example with a list (crazy escaping...) ::
 
     dconf::set { "/org/gnome/libgnomekbd/keyboard/options":
             value => "\\\"['ctrl\\tctrl:nocaps']\\\"",
