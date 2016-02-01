@@ -1,6 +1,6 @@
 class dconf {
 
-	package { 'dconf-tools':
-		ensure => present,
-	}
+  package { 'dconf-tools':
+    ensure => present,
+  }
 }
