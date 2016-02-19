@@ -8,11 +8,20 @@ def dconf_json(obj)
       # dconf deviates "a bit" from the JSON standard
       return "'" << (obj.to_json)[1..-2] << "'";
     when Array
+      isTuple = false
       arrayRet = []
       obj.each do |a|
-        arrayRet.push(dconf_json(a))
+        if a == 'dconf::tuple' then
+          isTuple = true
+        else
+          arrayRet.push(dconf_json(a))
+        end
       end
-      return "[" << arrayRet.join(', ') << "]";
+      if isTuple then
+        return "(" << arrayRet.join(', ') << ")";
+      else
+        return "[" << arrayRet.join(', ') << "]";
+      end
     when Hash
       ret = []
       obj.keys.sort.each do |k|
@@ -34,6 +43,10 @@ The format is a "dialect" of JSON as produced and consumed by dconf.
     dconf_json({'key'=>'value'})
 
 Would return: {'key': 'value'}
+
+    dconf_json(['dconf::tuple', 'a', 'b'])
+
+Would return: ('a', 'b')
     EOS
   ) do |arguments|
     raise(Puppet::ParseError, "dconf_json(): Wrong number of arguments " +
